@@ -15,3 +15,4 @@ const travel = (x, y, memo = {}) => {
 
 
 console.log(travel(18, 18))
+
