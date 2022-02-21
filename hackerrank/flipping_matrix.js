@@ -1,41 +1,35 @@
 function flippingMatrix(matrix) {
   // Write your code here
-  // reverse each row so that highest elements left
-  bestCols = []
-  matrix.forEach(el => {
-    let fh = el.splice(0, (el.length / 2))
-    let sh = el.splice(0)
+  let out = []
+  let len = matrix.length - 1
+  let n = Math.floor(matrix.length / 2)
+  let max_sum = 0
+  for (var row = 0; row < n; row++) {
+    let acc = []
+    for (var col = 0; col < n; col++) {
 
-    if (mySum(fh) >= mySum(sh)) {
-      bestCols.push(fh)
-    } else {
-      bestCols.push(sh)
+      let q1 = matrix[row][col]
+      let q2 = matrix[len - row][col]
+      let q3 = matrix[row][len - col]
+      let q4 = matrix[len - row][len - col]
+      let max = Math.max(q1, q2, q3, q4)
+      acc.push(max)
+      max_sum += max
     }
-  })
-  console.log(bestCols)
-  // reverse cols so that highest elements top
-  var out = 0
-  for (var col = 0; col < bestCols[0].length; col++) {
-    let fsum = 0
-    let ssum = 0
-    for (var row = 0; row < bestCols.length / 2; row++) {
-      fsum += bestCols[row][col]
-      ssum += bestCols[bestCols.length - 1 - row][col]
-    }
-    fsum > ssum ? out += fsum : out += ssum
+    out.push(acc)
   }
   console.log(out)
-  return out
+  console.log(max_sum)
+  return max_sum
 }
 
 
-const mySum = s => {
-  sum = 0
-  s.forEach(el => sum += el)
-  return sum
-}
-
-let matrix = [[112, 42, 83, 119], [56, 125, 56, 49], [15, 78, 101, 43], [62, 98, 114, 108]]
+let matrix = [
+  [112, 42, 83, 119],
+  [56, 125, 56, 49],
+  [15, 78, 101, 43],
+  [62, 98, 114, 108]
+]
 
 flippingMatrix(matrix)
 
